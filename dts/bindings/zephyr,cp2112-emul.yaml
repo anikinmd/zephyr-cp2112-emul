@@ -1,0 +1,20 @@
+description: |
+  CP2112 USB-to-SMBus/GPIO bridge emulator.
+
+  The emulator exposes one I2C controller and exactly 8 GPIOs to a Linux
+  host over USB HID, so that the in-tree hid-cp2112 driver can drive them
+  as a native i2c-adapter and gpiochip.
+
+compatible: "zephyr,cp2112-emul"
+
+properties:
+  i2c-bus:
+    type: phandle
+    required: true
+    description: I2C controller exposed as the CP2112 I2C/SMBus bus.
+
+  gpios:
+    type: phandle-array
+    required: true
+    description: |
+      Exactly 8 GPIOs exposed as CP2112 GPIO0..GPIO7 (index 0 -> GPIO0).

@@ -1,0 +1,38 @@
+/*
+ * Example overlay for blackpill_f411ce.
+ *
+ * Exposes i2c0 and 8 GPIOs as a CP2112 device.
+ */
+
+/ {
+	cp2112: cp2112 {
+		compatible = "zephyr,cp2112-emul";
+		i2c-bus = <&i2c1>;
+		gpios = <&gpioa 0  GPIO_ACTIVE_HIGH>, // USR BTN
+			<&gpioa 1  GPIO_ACTIVE_HIGH>,
+			<&gpioa 2 GPIO_ACTIVE_HIGH>,
+			<&gpioa 3 GPIO_ACTIVE_HIGH>,
+			<&gpioa 4 GPIO_ACTIVE_HIGH>,
+			<&gpioa 5 GPIO_ACTIVE_HIGH>,
+			<&gpioa 6 GPIO_ACTIVE_HIGH>,
+			<&gpioc 13 GPIO_ACTIVE_HIGH>; // BLUE LED
+	};
+};
+
+&i2c1 {
+    // SCL: PB8, SDA: PB9
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+};
+
+&zephyr_udc0 {
+	status = "okay";
+	cp2112_hid: cp2112_hid {
+		compatible = "zephyr,hid-device";
+		protocol-code = "none";
+		in-report-size = <64>;
+		in-polling-period-us = <1000>;
+		out-report-size = <64>;
+		out-polling-period-us = <1000>;
+	};
+};
