@@ -37,7 +37,7 @@ See [boards/blackpill_f411ce.overlay](boards/blackpill_f411ce.overlay) for a com
 ## Tested Boards
 - [WeAct Blackpill F411CE](boards/blackpill_f411ce.overlay)
 - [Raspberry Pi Pico RP2040](boards/rpi_pico_rp2040.overlay)
-
+- [ESP32-S3 DevKitC](boards/esp32s3_devkitc_esp32s3_procpu.overlay)
 ## Behavior
 
 - I2C transfers use Zephyr’s I2C API  
