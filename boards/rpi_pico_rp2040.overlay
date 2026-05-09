@@ -1,0 +1,40 @@
+/*
+ * Example overlay for rpi_pico/rp2040.
+ *
+ * Exposes i2c0 and 8 GPIOs as a CP2112 device.
+ */
+
+/ {
+	cp2112: cp2112 {
+		compatible = "zephyr,cp2112-emul";
+		i2c-bus = <&i2c0>;
+
+		gpios = <&gpio0 0  GPIO_ACTIVE_HIGH>,
+			<&gpio0 1  GPIO_ACTIVE_HIGH>,
+			<&gpio0 2  GPIO_ACTIVE_HIGH>,
+			<&gpio0 3  GPIO_ACTIVE_HIGH>,
+			<&gpio0 6  GPIO_ACTIVE_HIGH>,
+			<&gpio0 7  GPIO_ACTIVE_HIGH>,
+			<&gpio0 8  GPIO_ACTIVE_HIGH>,
+			<&gpio0 25 GPIO_ACTIVE_HIGH>; /* On-board LED on Pico */
+	};
+};
+
+&i2c0 {
+	/* Default Zephyr Pico pins: SDA GP4, SCL GP5 */
+	status = "okay";
+	clock-frequency = <I2C_BITRATE_STANDARD>;
+};
+
+&zephyr_udc0 {
+	status = "okay";
+
+	cp2112_hid: cp2112_hid {
+		compatible = "zephyr,hid-device";
+		protocol-code = "none";
+		in-report-size = <64>;
+		in-polling-period-us = <1000>;
+		out-report-size = <64>;
+		out-polling-period-us = <1000>;
+	};
+};
