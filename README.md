@@ -34,6 +34,10 @@ To port this to a new board, add a small devicetree overlay.
 
 See [boards/blackpill_f411ce.overlay](boards/blackpill_f411ce.overlay) for a complete example.
 
+## Tested Boards
+- [WeAct Blackpill F411CE](boards/blackpill_f411ce.overlay)
+- [Raspberry Pi Pico RP2040](boards/rpi_pico_rp2040.overlay)
+
 ## Behavior
 
 - I2C transfers use Zephyr’s I2C API  
